@@ -39,7 +39,7 @@ body {
 
 /* Messages Area */
 .chat-messages {
-    flex: 1;
+    flex: 5;
     padding: 15px;
     overflow-y: scroll;
     font-size: 18px;
@@ -159,7 +159,7 @@ body {
 
     .chat-input {
         padding: 8px;
-        margin-bottom: 50px; /* Added margin to move input higher */
+        margin-bottom: 10px; /* Added margin to move input higher */
     }
 
     .chat-input input {
