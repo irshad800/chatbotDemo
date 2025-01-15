@@ -144,8 +144,8 @@ body {
 
 @media (max-width: 480px) {
     .chat-container {
-        width: 90%; /* Full width on mobile */
-        height: 80%; /* Adjust height */
+        width: 100%; /* Full width on mobile */
+        height: 100%; /* Full height on mobile */
         border-radius: 0; /* Remove border radius for edge-to-edge design */
     }
 
@@ -159,19 +159,12 @@ body {
         padding: 10px;
     }
 
-    .chat-input {
-        padding: 8px 10px; /* Reduce padding for a compact design */
-        margin-bottom: 10px; /* Add margin to move the input slightly higher */
-    }
-
     .chat-input input {
-        width: 70%;
         padding: 8px;
         font-size: 12px;
     }
 
     .chat-input button {
-        width: 25%;
         padding: 8px;
         font-size: 12px;
     }
