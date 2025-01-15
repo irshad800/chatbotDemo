@@ -10,24 +10,6 @@ function addMessage(text, isUser = false) {
     chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
-// Function to parse time input for reminders
-function parseReminderTime(input) {
-    const timePattern = /(\d+)\s*(seconds?|minutes?|hours?)/i;
-    const match = input.match(timePattern);
-    if (match) {
-        const value = parseInt(match[1], 10);
-        const unit = match[2].toLowerCase();
-        let milliseconds = 0;
-
-        if (unit.startsWith('second')) milliseconds = value * 1000;
-        else if (unit.startsWith('minute')) milliseconds = value * 60 * 1000;
-        else if (unit.startsWith('hour')) milliseconds = value * 60 * 60 * 1000;
-
-        return milliseconds;
-    }
-    return null;
-}
-
 // Function to handle the send message action
 async function sendMessage() {
     const userMessage = userInput.value.trim();
@@ -37,7 +19,13 @@ async function sendMessage() {
     addMessage(userMessage, true);
     userInput.value = '';
 
-    // Check if the user is asking for time
+    // Check if the message is a simple greeting
+    if (/hello|hi|hey/i.test(userMessage)) {
+        addMessage("Hello! How can I assist you today?");
+        return;
+    }
+
+    // Check if the user is asking for time or date
     if (userMessage.toLowerCase().includes("time") || userMessage.toLowerCase().includes("date")) {
         const currentTime = new Date().toLocaleString();
         addMessage(`Current date and time: ${currentTime}`);
@@ -56,6 +44,13 @@ async function sendMessage() {
         } else {
             addMessage("I couldn't understand the time for the reminder. Please specify it in seconds, minutes, or hours.");
         }
+        return;
+    }
+
+    // Check for unwanted or nonsensical input (like gibberish)
+    const unwantedInputPattern = /^[a-zA-Z0-9\s]*$/;  // Pattern to match normal alphanumeric input
+    if (!unwantedInputPattern.test(userMessage)) {
+        addMessage("I'm sorry, I don't have an answer for that yet.");
         return;
     }
 
@@ -87,9 +82,7 @@ async function sendMessage() {
 
 // Function to format the response, making **text** as headings
 function formatResponse(responseText) {
-    // Split the response into segments based on the presence of "**" to create headings
     const sections = responseText.split('**').map((segment, index) => {
-        // If the segment is an odd index, it's a heading, otherwise it's content
         if (index % 2 !== 0) {
             return `<h3>${segment}</h3>`;
         } else {
