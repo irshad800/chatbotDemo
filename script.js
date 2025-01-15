@@ -5,7 +5,7 @@ const userInput = document.getElementById('user-input');
 function addMessage(text, isUser = false) {
     const messageDiv = document.createElement('div');
     messageDiv.classList.add('message', isUser ? 'user-message' : 'bot-message');
-    messageDiv.textContent = text;
+    messageDiv.innerHTML = text;
     chatMessages.appendChild(messageDiv);
     chatMessages.scrollTop = chatMessages.scrollHeight;
 }
@@ -26,7 +26,7 @@ async function sendMessage() {
         return;
     }
 
-    // API call to ChatGPT to get the response
+    // API call 
     try {
         const response = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyAULa8yH0tbRL7blqk05ctJLr8feA3YwkM', {
             method: 'POST',
@@ -42,11 +42,29 @@ async function sendMessage() {
 
         const data = await response.json();
         const botReply = data.candidates[0].content.parts[0].text;
-        addMessage(botReply); // Displaying bot's reply
+
+        // Format the response to treat the stars as headings
+        const formattedReply = formatResponse(botReply);
+        addMessage(formattedReply); // Displaying formatted bot's reply
     } catch (error) {
         console.error('Error:', error);
         addMessage("I'm sorry, I couldn't process that. Please try again.");
     }
+}
+
+// Function to format the response, making **text** as headings
+function formatResponse(responseText) {
+    // Split the response into segments based on the presence of "**" to create headings
+    const sections = responseText.split('**').map((segment, index) => {
+        // If the segment is an odd index, it's a heading, otherwise it's content
+        if (index % 2 !== 0) {
+            return `<h3>${segment}</h3>`;
+        } else {
+            return `<p>${segment}</p>`;
+        }
+    });
+
+    return sections.join('');
 }
 
 // Handle enter key press for sending messages
