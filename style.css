@@ -159,7 +159,7 @@ body {
 
     .chat-input {
         padding: 8px;
-        margin-bottom: 10px; /* Added margin to move input higher */
+        margin-bottom: 30px; /* Added margin to move input higher */
     }
 
     .chat-input input {
