@@ -17,8 +17,8 @@ body {
 
 /* Chat Container */
 .chat-container {
-    width: 60%; /* Default width for desktops */
-    height: 80%; /* Default height for desktops */
+    width: 60%;
+    height: 80%;
     background: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -33,16 +33,16 @@ body {
     color: #fff;
     text-align: center;
     padding: 15px;
-    font-size: 22px; /* Default font size for desktop */
+    font-size: 22px;
     font-weight: bold;
 }
 
 /* Messages Area */
 .chat-messages {
-    flex: 1; /* Takes available space dynamically */
+    flex: 1;
     padding: 15px;
     overflow-y: scroll;
-    font-size: 18px; /* Default font size for desktop */
+    font-size: 18px;
 }
 
 /* Message Styling */
@@ -50,7 +50,7 @@ body {
     margin: 12px 0;
     padding: 12px;
     border-radius: 8px;
-    font-size: 16px; /* Default font size for messages */
+    font-size: 16px;
 }
 
 .user-message {
@@ -67,21 +67,22 @@ body {
     display: flex;
     padding: 15px;
     background-color: #f1f1f1;
+    position: relative;
 }
 
 .chat-input input {
-    flex: 1; /* Input takes remaining space */
+    flex: 1;
     padding: 12px;
-    font-size: 16px; /* Default input font size for desktop */
+    font-size: 16px;
     border-radius: 8px;
     border: 1px solid #ccc;
 }
 
 .chat-input button {
-    width: 20%; /* Default button width for desktop */
+    width: 20%;
     margin-left: 10px;
     padding: 12px;
-    font-size: 16px; /* Default button font size */
+    font-size: 16px;
     background-color: #4CAF50;
     border: none;
     color: white;
@@ -96,70 +97,79 @@ body {
 /* Responsive Styles for Mobile */
 @media (max-width: 768px) {
     .chat-container {
-        width: 90%; /* Larger width for mobile */
-        height: 90%; /* Taller height for better use of space */
+        width: 90%;
+        height: 90%;
     }
 
     .chat-header {
-        font-size: 20px; /* Smaller font size for mobile */
+        font-size: 20px;
         padding: 10px;
     }
 
     .chat-messages {
-        font-size: 15px; /* Adjusted font size for mobile messages */
+        font-size: 15px;
         padding: 10px;
     }
 
     .message {
-        font-size: 14px; /* Smaller font for mobile messages */
+        font-size: 14px;
         margin: 8px 0;
         padding: 10px;
     }
 
+    .chat-input {
+        padding: 10px;
+    }
+
     .chat-input input {
-        padding: 10px; /* Adjusted padding for input field */
-        font-size: 14px; /* Smaller font size for input */
+        padding: 10px;
+        font-size: 14px;
     }
 
     .chat-input button {
-        width: 25%; /* Wider button for easier tapping */
-        padding: 10px; /* Adjusted padding for button */
-        font-size: 14px; /* Smaller font size */
+        width: 25%;
+        padding: 10px;
+        font-size: 14px;
     }
 }
 
 /* Styles for Smaller Mobile Screens (480px and below) */
 @media (max-width: 480px) {
     .chat-container {
-        width: 100%; /* Full width on very small screens */
-        height: 100%; /* Full height for edge-to-edge design */
-        border-radius: 0; /* Remove border radius */
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
     }
 
     .chat-header {
-        font-size: 18px; /* Smaller font size for header */
+        font-size: 18px;
         padding: 8px;
     }
 
     .chat-messages {
-        font-size: 14px; /* Smaller font for messages */
+        font-size: 14px;
         padding: 8px;
     }
 
     .message {
-        font-size: 13px; /* Adjust font size for compact view */
+        font-size: 13px;
         margin: 6px 0;
         padding: 8px;
     }
 
+    .chat-input {
+        padding: 8px;
+        margin-bottom: 10px; /* Added margin to move input higher */
+    }
+
     .chat-input input {
         padding: 8px;
-        font-size: 12px; /* Compact input font size */
+        font-size: 12px;
     }
 
     .chat-input button {
-        width: 30%; /* Button width increased for easier tapping */
+        width: 30%;
         padding: 8px;
-        font-size: 12px; /* Smaller button font size */
+        font-size: 12px;
     }
 }
