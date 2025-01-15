@@ -144,8 +144,8 @@ body {
 
 @media (max-width: 480px) {
     .chat-container {
-        width: 70%; /* Full width on mobile */
-        height: 70%; /* Adjust height */
+        width: 90%; /* Full width on mobile */
+        height: 80%; /* Adjust height */
         border-radius: 0; /* Remove border radius for edge-to-edge design */
     }
 
