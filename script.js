@@ -10,6 +10,24 @@ function addMessage(text, isUser = false) {
     chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
+// Function to parse time input for reminders
+function parseReminderTime(input) {
+    const timePattern = /(\d+)\s*(seconds?|minutes?|hours?)/i;
+    const match = input.match(timePattern);
+    if (match) {
+        const value = parseInt(match[1], 10);
+        const unit = match[2].toLowerCase();
+        let milliseconds = 0;
+
+        if (unit.startsWith('second')) milliseconds = value * 1000;
+        else if (unit.startsWith('minute')) milliseconds = value * 60 * 1000;
+        else if (unit.startsWith('hour')) milliseconds = value * 60 * 60 * 1000;
+
+        return milliseconds;
+    }
+    return null;
+}
+
 // Function to handle the send message action
 async function sendMessage() {
     const userMessage = userInput.value.trim();
@@ -26,7 +44,22 @@ async function sendMessage() {
         return;
     }
 
-    // API call 
+    // Check if the user is setting a reminder
+    if (userMessage.toLowerCase().includes("set a reminder")) {
+        const reminderTime = parseReminderTime(userMessage);
+        if (reminderTime) {
+            const reminderMessage = userMessage.replace(/set a reminder to|in \d+ (seconds?|minutes?|hours?)/i, "").trim();
+            addMessage(`Got it! I'll remind you: "${reminderMessage}" in ${reminderTime / 1000} seconds.`);
+            setTimeout(() => {
+                addMessage(`Reminder: "${reminderMessage}"`);
+            }, reminderTime);
+        } else {
+            addMessage("I couldn't understand the time for the reminder. Please specify it in seconds, minutes, or hours.");
+        }
+        return;
+    }
+
+    // API call to ChatGPT to get the response
     try {
         const response = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyAULa8yH0tbRL7blqk05ctJLr8feA3YwkM', {
             method: 'POST',
